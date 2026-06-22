@@ -1,0 +1,59 @@
+const firebaseConfig = {
+  apiKey: "AIzaSyBci5R0nG_dt93Foqy3aSHD2ubDhecCIX0",
+  authDomain: "ask-me-fea2b.firebaseapp.com",
+  projectId: "ask-me-fea2b",
+  storageBucket: "ask-me-fea2b.firebasestorage.app",
+  messagingSenderId: "555180109075",
+  appId: "1:555180109075:web:4f6d7dbd93e0f97f537ee6"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+function register(){
+
+    const phrase =
+        document.getElementById("phrase").value.trim();
+
+    const email =
+        document.getElementById("email").value;
+
+    const password =
+        document.getElementById("password").value;
+
+    const confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+    if(phrase !== "يا طاووسي ملك العزيز"){
+        alert("يجب كتابة العبارة بشكل صحيح");
+        return;
+    }
+
+    if(email === ""){
+        alert("يرجى إدخال البريد الإلكتروني");
+        return;
+    }
+
+    if(password.length < 6){
+        alert("كلمة السر يجب أن تكون 6 أحرف على الأقل");
+        return;
+    }
+
+    if(password !== confirmPassword){
+        alert("كلمتا السر غير متطابقتين");
+        return;
+    }
+
+    firebase.auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then(() => {
+
+        alert("تم إنشاء الحساب بنجاح");
+
+    })
+    .catch((error) => {
+
+        alert(error.message);
+
+    });
+
+}
